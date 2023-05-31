@@ -1,3 +1,4 @@
+// Joel's implementation
 function printFirstTen(){
     let sequence = [0,1];
     console.log(sequence[0]);
@@ -9,3 +10,17 @@ function printFirstTen(){
 }
 printFirstTen();
     
+// Eric's implementation
+function fib(n) {
+    let curr = 1;
+    let prev = 0;
+    console.log(prev);
+    for (let i = 1; i < n; ++i) {
+        console.log(curr);
+        let temp = prev;
+        prev = curr;
+        curr += temp;
+    }
+}
+
+fib(10);
