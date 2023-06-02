@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badly Explained Movies</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+    crossorigin="anonymous">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-dark">
+  <div class="patterns pt1">
+<div class="container my-5 text-center">
+<div class="card p-3" id="myCard">
+<h1 class="mb-4">Badly Explained Movies</h1>  
+<form onsubmit ="getGuess(event)">
+<hr class="mb-5" id ="myLine"/>
+<div id="prompt" class="m-2"></div>
+<hr id="myLine"/>
+<div class="input-group my-3">
+    <input id="input" type="text" class="form-control mb-3"
+    placeholder="Enter guess here">
+</div>
+<div class="d-grid gap-2">
+  <button id= "subButton" class="btn btn-primary" type="button">Submit</button>
+<hr class="mb-3" id="myLine"/>
+<button id ="hintButton" class="btn btn-secondary mb-4" type="button">Show Hint</button>
+</div>
+</form>
+<div id="output" class="mb-2"></div>
+</div>
+</div>
+  </div>
+<script src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
