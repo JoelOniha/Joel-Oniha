@@ -6,8 +6,9 @@ import TaskTable from './TaskTable';
 
 import TaskService from '../../services/task-service';
 
-export default function TaskPage() {
+export default function TaskPage(props) {
     const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(false);
 
   useEffect(() =>{
     if(!tasks.length){
@@ -19,15 +20,17 @@ export default function TaskPage() {
   );
 
   async function onInitialLoad() {
+    setLoading(true);
     try{
     const tasks = await TaskService.fetchTasks();
-    setTasks(tasks); 
+    setTasks(tasks.filter((task) => task.userId === props.user.uid)); 
   }catch(err){
   }
+  setLoading(false);
 }
 
   async function onTaskCreate(name) {
-    const task = await TaskService.createTask(new Task(null, name, false));
+    const task = await TaskService.createTask(new Task(null, name, false, props.user.uid));
     setTasks([...tasks, task]);
   }
 
@@ -57,6 +60,7 @@ export default function TaskPage() {
         <TaskInput onTaskCreate={onTaskCreate}></TaskInput>
         <TaskTable
           tasks={tasks}
+          loading={loading}
           onTaskRemove={onTaskRemove}
           onTaskCompleteToggle={onTaskCompleteToggle}
         ></TaskTable>

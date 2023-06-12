@@ -1,9 +1,11 @@
 import React from 'react';
+import Spinner from '..//common/Spinner'
 
 export default function TaskTable(props) {
   return (
     <div>
-      <table className="table">
+      {
+        props.loading ? <Spinner></Spinner> : <table className="table">
         <thead>
           <tr>
             <th>Task</th>
@@ -29,6 +31,8 @@ export default function TaskTable(props) {
           ))}
         </tbody>
       </table>
+      }
+      
     </div>
   );
 }

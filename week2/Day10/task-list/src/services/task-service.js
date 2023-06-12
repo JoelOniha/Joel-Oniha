@@ -15,7 +15,7 @@ class TaskService {
     const tasks = [];
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      const task = new Task(doc.id, data.name, data.complete);
+      const task = new Task(doc.id, data.name, data.complete, data.userId);
       tasks.push(task);
     });
 
@@ -27,6 +27,7 @@ class TaskService {
     const docRef = await addDoc(collectionRef, {
       name: task.name,
       complete: task.complete,
+      userId: task.userId
     });
     task.id = docRef.id;
     return task;

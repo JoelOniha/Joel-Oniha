@@ -15,24 +15,40 @@ import TaskPage from './components/task/TaskPage';
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
 import Navbar from './components/common/Navbar';
+import RequireAuth from './components/common/RequireAuth';
+import Spinner from './components/common/Spinner';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [isuserUpdated, setIsUserUpdated] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
+      setIsUserUpdated(true);
     });
   }, []);
 
   return (
     <BrowserRouter>
       <Navbar user={user} />
-      <Routes>
-        <Route path="/" element={<TaskPage />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
-      </Routes>
+      {
+        isuserUpdated ? (<Routes>
+          <Route path="/" element={
+            <RequireAuth user = {user}>
+              <TaskPage user ={user} />
+            </RequireAuth>
+          
+          }></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/register" element={<RegisterPage />}></Route>
+        </Routes>) :(
+          <div className=' mt-5 text-center'>
+            <Spinner/>
+          </div>
+        )
+      }
+      
     </BrowserRouter>
   );
 }
