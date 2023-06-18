@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/firebase';
-import { useNavigate } from 'react-router-dom';
-import Button from '../common/Button';
+import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import { useNavigate } from "react-router-dom";
+import Button from "../common/Button";
+import Alert from "../common/Alert";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function onFormSubmit(e) {
     e.preventDefault();
@@ -16,9 +18,9 @@ export default function LoginPage() {
     try {
       const userCred = await signInWithEmailAndPassword(auth, email, password);
       console.log(userCred);
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      alert(err.message);
+      setError(err.message);
     }
     setLoading(false);
   }
@@ -56,11 +58,14 @@ export default function LoginPage() {
             {/*<button type="submit" className="btn btn-primary">
               Login
   </button>*/}
-            <Button type='submit' className= 'px-5' loading = {loading}>
+            <Button type="submit" className="px-5" loading={loading}>
               Login
             </Button>
           </div>
         </form>
+        <Alert className="mt-5" show={error} onHide={() => setError("")}>
+          {error}
+        </Alert>
       </div>
     </div>
   );
